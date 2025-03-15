@@ -1,0 +1,172 @@
+----------------------------------------------------
+Das map einriuchten.
+
+https://leafletjs.com/examples/quick-start/
+---------------------------------------------------
+
+
+
+
+
+
+ich werde einmal die funktionen eklernen die in map-script.js sind 
+
+
+
+
+
+--------------------------------------------------------------
+var map = L.map('map').setView([53.550507, 8.585815], 12);
+Eine Leaflet-Karte wird initialisiert und auf ein HTML-Element mit der ID map angewendet.
+Die Karte wird mit der angegebenen geografischen Position ([53.550507, 8.585815], also Bremerhaven) und einem Zoomlevel von 12 zentriert.
+--------------------------------------------------------------
+
+
+
+-------------
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+ Ein Tile Layer von OpenStreetMap wird zur Karte hinzugefügt, der die Kartenkacheln von der angegebenen URL lädt.
+ Der maxZoom ist auf 19 gesetzt, was bedeutet, dass maximal bis Zoomstufe 19 gezoomt werden kann. Das Attributionsfeld zeigt den rechtlichen Hinweis von OpenStreetMap an
+--------------
+
+
+
+
+
+
+
+
+
+------------
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent(e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
+
+Ein Popup wird erstellt, das angezeigt wird, wenn auf die Karte geklickt wird.
+Die Funktion onMapClick wird bei jedem Klick auf die Karte ausgeführt und zeigt die Koordinaten des Klicks in einem Popup an.
+Also das ist gut, weil ich die koordinaten nicht googlen will.
+---------------------
+
+
+
+
+-------------------
+var shipMarkers = {};
+
+ Ein Objekt zur Speicherung der Marker für die Schiffe auf der Karte.
+ Es wird verwendet, um die Positionen der Schiffe zu aktualisieren, ohne jedes Mal neue Marker zu erstellen.
+
+-----------------------
+
+
+
+-------------hmmmmmm-----
+function parseCSV(csvData) {
+    const lines = csvData.split('\n');
+    const headers = lines[0].split(',');
+    const result = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const obj = {};
+        const currentline = lines[i].split(',');
+
+        for (let j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+    }
+
+    return result;
+}
+
+ Diese Funktion wandelt eine CSV-Datei in ein Array von Objekten um. (Später sollten wir aus sql die daten nehmen)
+ Jede Zeile der CSV wird in ein Objekt umgewandelt, wobei die Schlüssel die Header der CSV-Datei sind.
+
+
+ -----------------------------------
+
+
+
+ -------------------------------------
+ function loadShipData() {
+    const currentZoom = map.getZoom();
+    const currentCenter = map.getCenter();
+
+    fetch('ais_data.csv')
+        .then(response => response.text())
+        .then(csvText => {
+            const shipData = parseCSV(csvText);
+            console.log('Geladene Schiffsdaten:', shipData);
+            displayShipsOnMap(shipData);
+            map.setView(currentCenter, currentZoom);
+        })
+        .catch(error => console.error('Fehler beim Laden der Schiffsdaten:', error));
+}
+Diese Funktion lädt die Schiffsdaten aus einer CSV-Datei (ais_data.csv oder SQL..) und zeigt sie auf der Karte an.
+Dabei werden die aktuellen Zoom- und Karteneinstellungen beibehalten.
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------
+function displayShipsOnMap(shipData) {
+    shipData.forEach(ship => {
+        if (ship.lat && ship.lon) {
+            const lat = parseFloat(ship.lat);
+            const lon = parseFloat(ship.lon);
+            const heading = parseFloat(ship.heading);
+
+            if (shipMarkers[ship.mmsi]) {
+                shipMarkers[ship.mmsi].setLatLng([lat, lon]);
+                shipMarkers[ship.mmsi].setRotationAngle(heading);
+            } else {
+                var marker = L.marker([lat, lon], {
+                    icon: shipIcon,
+                    rotationAngle: heading
+                }).addTo(map);
+                marker.bindPopup("MMSI: " + ship.mmsi);
+                shipMarkers[ship.mmsi] = marker;
+            }
+        }
+    });
+}
+
+Diese Funktion zeigt die Schiffe auf der Karte an, indem sie für jedes Schiff einen Marker erstellt oder aktualisiert.
+Wenn ein Marker für ein Schiff bereits existiert, wird dessen Position aktualisiert. Ansonsten wird ein neuer Marker erstellt.(Später muss das gändert weden)
+-----------------------------------------
+
+
+
+
+------------------------------------
+loadShipData();
+setInterval(loadShipData, 3000);
+ Die Funktion loadShipData wird initial aufgerufen, um die Schiffe auf der Karte zu laden.
+ Danach wird sie alle 3 Sekunden erneut aufgerufen, um die Positionen der Schiffe zu aktualisieren.
+ und so muss man nicht immer die ganze seite aktualiesieren...
+ -----------------------------------
+
+
+
+
+
+
+

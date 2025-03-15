@@ -1,0 +1,3 @@
+Watcher ==> Data.csv ==> Filter the ship type ==> import to database ==> fetch data from Database  
+Style anpassen: Karte Größer machen die Farben anpassen. 
+

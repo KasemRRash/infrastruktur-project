@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tabelle.css">
+    <script src="schiffe.js"></script>
+    <title>Schiffsdaten</title>
+</head>
+<body>
+    <h1>Schiffsdaten</h1>
+    <button id="load-ships-btn">Daten aktualisieren</button>
+
+    <table>
+      <thead>
+          <tbody id="data-table">
+              <!-- Dynamische Inhalte werden hier geladen -->
+          </tbody>
+      </table>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dataTable = document.getElementById('data-table');
+            const loadShipsBtn = document.getElementById('load-ships-btn');
+
+            function fetchData() {
+                console.log('Fetching data...');
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/docker-kasrashrash-web/data.html', true);
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        console.log('Data fetched successfully.');
+                        dataTable.innerHTML = this.responseText;
+                    } else {
+                        console.error('Error fetching data:', this.statusText);
+                    }
+                };
+                xhr.onerror = function() {
+                    console.error('Request failed');
+                };
+                xhr.send();
+            }
+
+            // Aktualisierung in einem vernünftigen Intervall
+            const fetchInterval = setInterval(fetchData, 1000); // 10 Sekunden
+
+            // Initiales Laden der Daten
+            fetchData();
+
+            // Script ausführen bei Button-Klick
+            loadShipsBtn.addEventListener('click', function() {
+                loadShipsBtn.disabled = true;
+                loadShipsBtn.textContent = "Aktualisieren...";
+
+                fetch('/docker-kasrashrash-web/cgi-bin/daten-sammler-aktuell/loadships.sh', {
+                    method: 'POST',
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert('Script wurde erfolgreich ausgeführt: ' + data);
+                    fetchData(); // Daten nach dem Skript neu laden
+                    loadShipsBtn.disabled = false;
+                    loadShipsBtn.textContent = "Daten aktualisieren";
+                })
+                .catch(error => {
+                    alert('Fehler beim Ausführen des Skripts: ' + error);
+                    loadShipsBtn.disabled = false;
+                    loadShipsBtn.textContent = "Daten aktualisieren";
+                });
+            });
+
+            // Beende das Intervall, wenn die Seite verlassen wird
+            window.addEventListener('beforeunload', function() {
+                clearInterval(fetchInterval);
+            });
+        });
+    </script>
+</body>
+</html>
