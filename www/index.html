@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semesteraufgabe 2024</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <div id="accordion">
+        <div class="group">
+<!-- Gruppe: Registrierung und Login -->
+         <h3>Registrierung und Login</h3>
+            <div class="content">
+<!-- Registrierungsformular -->
+              <h4>Registrierung</h4>
+                <form id="register-form">
+                    <label for="firstname">Vorname:</label>
+                    <input type="text" name="firstname" id="firstname" placeholder="Bitte Vorname eingeben" required>
+
+                    <label for="lastname">Nachname:</label>
+                    <input type="text" name="lastname" id="lastname" placeholder="Bitte Nachname eingeben" required>
+
+                    <label for="email">E-Mail:</label>
+                    <input type="email" name="email" id="email" placeholder="Bitte Email Adresse eingeben" required>
+
+                    <label for="phonenumber">Mobile Nummer:</label>
+                    <input type="text" name="phonenumber" id="phonenumber" placeholder="Bitte Mobile Nummer eingeben" required>
+
+                    <label for="password">Passwort:</label>
+                    <input type="password" name="password" id="password" placeholder="Bitte Passwort eingeben" required>
+
+                    <input type="submit" value="Registrieren">
+                </form>
+
+<!-- Loginformular -->
+
+                <h4>Login</h4>
+                <form id="login-form">
+                    <label for="emailLogin">E-Mail:</label>
+                    <input type="email" id="emailLogin" name="emailLogin" placeholder="Email eingeben Bitte" required>
+
+                    <label for="passwordLogin">Passwort:</label>
+                    <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Passwort eingeben" required>
+
+                    <input type="submit" value="Einloggen">
+                </form>
+            </div>
+        </div>
+<!-- Gruppe:Karte -->        
+        <div class="group disabled" id="map-group">
+            <h3>Karte</h3>
+            <div class="content">
+                <div id="map"></div>
+            </div>
+        </div>
+<!-- Gruppe: Schiffe -->
+        <div class="group disabled" id="ships-group">
+            <h3>Schiffe</h3>
+            <div class="content">
+                <!-- <button onclick="startFetcher()">Start Fetcher</button>
+                <button onclick="stopFetcher()">Stop Fetcher</button>--> 
+
+                <table id="ships-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>MMSI</th>
+                            <th>Position</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<!-- Verlinkung zur JavaScript-Datei -->
+    <script src="script.js"></script>
+</body>
+</html>
+

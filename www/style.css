@@ -1,0 +1,103 @@
+body { 
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* Schwarz */
+    color: #ffffff; /* Weiß */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#accordion {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    border: 1px solid #444444; /* Dunkles Grau */
+    border-radius: 5px;
+    background-color: #222222; /* Sehr dunkles Grau */
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Leichter weißer Schatten */
+}
+
+.group h3 {
+    margin: 0;
+    padding: 10px;
+    background-color: #444444; /* Dunkles Grau */
+    color: #ffffff; /* Weiß */
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.group .content {
+    display: none;
+    padding: 10px;
+    border-top: 1px solid #444444; /* Dunkles Grau */
+    background-color: #222222; /* Sehr dunkles Grau */
+    border-radius: 0 0 5px 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #ffffff; /* Weiß */
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 10px;
+    border: 1px solid #444444; /* Dunkles Grau */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333333; /* Mittleres Grau */
+    color: #ffffff; /* Weiß */
+}
+
+input[type="submit"] {
+    padding: 10px;
+    background-color: #555555; /* Helleres Grau */
+    border: none;
+    border-radius: 5px;
+    color: #ffffff; /* Weiß */
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #666666; /* Helleres Grau beim Hover */
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    border: 1px solid #444444; /* Dunkles Grau */
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #222222; /* Sehr dunkles Grau */
+}
+
+table, th, td {
+    border: 1px solid #444444; /* Dunkles Grau */
+    padding: 10px;
+    text-align: left;
+    color: #ffffff; /* Weiß */
+}
+
+th {
+    background-color: #333333; /* Mittleres Grau */
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
