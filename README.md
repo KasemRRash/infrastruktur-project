@@ -27,48 +27,48 @@ Dieses Projekt wurde im Rahmen eines Hochschulprojekts entwickelt und diente der
 
 ## Verzeichnisstruktur 
 
-|   deploy.sh
-|   deploy_local.sh
-|   README.md
-|
-+---cgi
-|       data.csv
-|       db_config.sh
-|       delete_from_db.sh
-|       get_positions.sh
-|       login.sh
-|       logout.sh
-|       new_watcher.sh
-|       process_queue.sh
-|       readwrite.sh
-|       register.sh
-|       rhodes-last.txt
-|       rhodes.pid
-|       send_email.sh
-|       sent_emails.txt
-|       tcp_email_server.sh
-|
-+---db
-|       initdata.sql
-|
-+---gnuplot-lasttest
-|       last-test.sh
-|       logfile.txt
-|       new_gnuplot.gp
-|       response.gp
-|       response_body.txt
-|       response_times.gp
-|       response_times_plot.png
-|       sortskript.sh
-|
-\---www
-    |   index.html
-    |   script.js
-    |   style.css
-    |
-    \---map
-            map-index.html
-            map-scropt.js
-            map-style.css
-            test-data.csv
+<details> <summary><strong>📁 Projektstruktur anzeigen</strong></summary>
+.
+├── deploy.sh
+├── deploy_local.sh
+├── README.md
+├── cgi/
+│   ├── data.csv
+│   ├── db_config.sh
+│   ├── delete_from_db.sh
+│   ├── get_positions.sh
+│   ├── login.sh
+│   ├── logout.sh
+│   ├── new_watcher.sh
+│   ├── process_queue.sh
+│   ├── readwrite.sh
+│   ├── register.sh
+│   ├── rhodes-last.txt
+│   ├── rhodes.pid
+│   ├── send_email.sh
+│   ├── sent_emails.txt
+│   └── tcp_email_server.sh
+├── db/
+│   └── initdata.sql
+├── gnuplot-lasttest/
+│   ├── last-test.sh
+│   ├── logfile.txt
+│   ├── new_gnuplot.gp
+│   ├── response.gp
+│   ├── response_body.txt
+│   ├── response_times.gp
+│   ├── response_times_plot.png
+│   └── sortskript.sh
+└── www/
+    ├── index.html
+    ├── script.js
+    ├── style.css
+    └── map/
+        ├── map-index.html
+        ├── map-scropt.js
+        ├── map-style.css
+        └── test-data.csv
+
+
+</details>
 
