@@ -2,6 +2,9 @@
 
 Infra-Rhodes ist eine Webanwendung zur Anzeige und Analyse von Schiffsbewegungen mithilfe empfangener AIS-Daten. Ziel des Projekts war es, reale Schiffspositionen auf einer Live-Karte darzustellen, in Tabellenform auszuwerten und automatisiert in einer Datenbank zu pflegen.
 
+![image](https://github.com/user-attachments/assets/1241ce85-7b59-4d5e-914f-0404b606027a)
+
+
 Die Anwendung ermöglicht:
 - die Visualisierung von Echtzeit-Schiffspositionen auf einer interaktiven Karte
 - eine tabellarische Auflistung und Filterung der empfangenen Daten
